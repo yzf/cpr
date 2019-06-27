@@ -54,7 +54,7 @@ message(STATUS "C++ Requests CMake Options")
 message(STATUS "=======================================================")
 cpr_option(USE_SYSTEM_CURL
     "If ON, this project will look in the system paths for an installed curl library" ON)
-cpr_option(BUILD_CPR_TESTS "Set to ON to build cpr tests." ON)
+cpr_option(BUILD_CPR_TESTS "Set to ON to build cpr tests." OFF)
 cpr_option(GENERATE_COVERAGE "Set to ON to generate coverage reports." OFF)
 cpr_option(CPR_CURL_NOSIGNAL "Set to ON to disable use of signals in libcurl." OFF)
 cpr_option(USE_SYSTEM_GTEST
@@ -76,12 +76,11 @@ set(prefix                  "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix             "\${prefix}")
 set(includedir              "\${prefix}/include")
 set(libdir                  "${CMAKE_INSTALL_PREFIX}/lib")
+
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/libcpr.pc.in"
     "${CMAKE_CURRENT_BINARY_DIR}/libcpr.pc" @ONLY)
+
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libcpr.pc"
     DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig")
 
 install(DIRECTORY include/cpr/ DESTINATION "${CMAKE_INSTALL_PREFIX}/include/cpr")
-install(TARGETS ${CPR_LIBRARIES}
-    LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/lib"
-    ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/lib")
